@@ -9,6 +9,10 @@ getPassports = do
               prune (c:cs) = (splut !! 0, splut !! 1) : prune cs
                   where splut = splitOn ":" c
 
+allFs :: [(String, String)] -> Bool
+allFs line = and [c `elem` t | c <- ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]]
+    where t = [fst pair | pair <- line]
+
 validPair :: (String, String) -> Bool
 validPair ("byr", yr) = length yr == 4 && ryr >= 1920 && ryr <= 2002 
     where ryr = read yr
@@ -45,7 +49,7 @@ validPassPort (c:cs) = validPair c && validPassPort cs
 
 allValid :: [[(String, String)]] -> Int
 allValid [] = 0
-allValid (c:cs) = toInt (validPassPort c) + allValid cs
+allValid (c:cs) = toInt (validPassPort c && allFs c) + allValid cs
 
 main :: IO ()
 main = do
