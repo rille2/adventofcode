@@ -36,9 +36,6 @@ validPair ("pid", p) = length p == 9 && and [isNumber x | x <- p]
 
 validPair _ = True
 
-
-
-
 toInt :: Bool -> Int
 toInt True = 1
 toInt False = 0

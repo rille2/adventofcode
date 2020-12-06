@@ -9,7 +9,7 @@ decode :: String -> Char -> Char -> Int -> Int -> Int
 decode (x:[]) cl ch lo hi
   | x == ch = hi
   | otherwise = lo
-
+  
 decode (x:xs) cl ch lo hi
   | x == ch = decode xs cl ch (mid + 1) hi
   | x == cl = decode xs cl ch lo mid
@@ -28,7 +28,6 @@ findMissing :: [Int] -> Int
 findMissing (x:xs) 
   | head xs - x == 2 = x + 1
   | otherwise = findMissing xs
-
 
 main :: IO ()
 main = do
