@@ -34,6 +34,6 @@ traverseCount bag allbags
 
 main = do
     s <- readFile "bags"
-    -- print $ traverseCount "shinygold" (parseBags $ lines s)
-    print $ head $ parseBags $ lines s
+    print $ traverseCount "shinygold" (parseBags $ lines s)
+    -- print $ head $ parseBags $ lines s
 
