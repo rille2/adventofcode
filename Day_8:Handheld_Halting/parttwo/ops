@@ -623,7 +623,7 @@ nop -320
 acc +1
 jmp -134
 acc +46
-bop + 4
+jmp -564
 acc +40
 acc +29
 acc +13
