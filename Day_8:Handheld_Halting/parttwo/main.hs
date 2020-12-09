@@ -17,12 +17,6 @@ opposite :: String -> String
 opposite "jmp" = "nop"
 opposite "nop" = "jmp"
 
-
-main :: IO ()
-main = do
-    p <- readFile "ops"
-    print $ head $ concat [traverseOps (head x) x [] 0 0 | x <- (allparse (parse (lines p)) 0)] 
-
 traverseOps :: (String, Int) -> [(String, Int)] -> [Int] -> Int -> Int -> [Int]
 traverseOps op allops traversed index accm
   | fst op == "nop" && ((index + 1) `elem` traversed) = []
@@ -34,3 +28,9 @@ traverseOps op allops traversed index accm
   | fst op == "nop" = traverseOps (allops !! (index + 1)) allops (index:traversed) (index + 1) accm
   | fst op == "acc" = traverseOps (allops !! (index + 1)) allops (index:traversed) (index + 1) (accm + snd op)
   | fst op == "jmp" = traverseOps (allops !! (index + snd op)) allops (index:traversed) (index + snd op) accm
+
+main :: IO ()
+main = do
+    p <- readFile "ops"
+    print $ head $ concat [traverseOps (head x) x [] 0 0 | x <- (allparse (parse (lines p)) 0)] 
+
